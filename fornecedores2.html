@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista Secreta de Fornecedores - Acesso Vitalício</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-decoration: none;
+        color: white;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        opacity: 0.8;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+        color: white;
+        text-align: center;
+        padding: 4rem 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.3;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        font-weight: 900;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .hero .highlight {
+        font-size: 4rem;
+        color: #fff200;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        display: block;
+        margin: 0.5rem 0;
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(45deg, #28a745, #20c997);
+        color: white;
+        padding: 1.2rem 3rem;
+        font-size: 1.3rem;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+        animation: pulse 2s infinite;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 25px rgba(40, 167, 69, 0.6);
+      }
+
+      /* Features Section */
+      .features {
+        padding: 4rem 0;
+        background: #f8f9fa;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #333;
+        font-weight: bold;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        border-color: #667eea;
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Products Grid */
+      .products {
+        padding: 4rem 0;
+        background: white;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .product-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+
+      .product-card:hover::before {
+        left: 100%;
+      }
+
+      .product-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        border-color: #ff6b6b;
+      }
+
+      .product-image {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .product-price {
+        font-size: 1.5rem;
+        color: #28a745;
+        font-weight: bold;
+      }
+
+      /* Testimonials */
+      .testimonials {
+        padding: 4rem 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .testimonial-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      /* Final CTA */
+      .final-cta {
+        padding: 4rem 0;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+        text-align: center;
+        color: white;
+      }
+
+      .final-cta h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+      }
+
+      .guarantee {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin: 2rem auto;
+        max-width: 500px;
+        backdrop-filter: blur(10px);
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+        }
+        50% {
+          box-shadow: 0 4px 25px rgba(40, 167, 69, 0.7);
+        }
+        100% {
+          box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero .highlight {
+          font-size: 3rem;
+        }
+
+        .hero p {
+          font-size: 1.1rem;
+        }
+
+        .cta-button {
+          padding: 1rem 2rem;
+          font-size: 1.1rem;
+        }
+      }
+
+      /* Scroll animations */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="container">
+        <a href="#" class="logo">💎 Fornecedores Premium</a>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#features">Recursos</a></li>
+          <li><a href="#products">Produtos</a></li>
+          <li><a href="#testimonials">Depoimentos</a></li>
+          <li><a href="#contact">Contato</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="container">
+          <div class="hero-content">
+            <h1>
+              ACESSO EXCLUSIVO A MAIS DE
+              <span class="highlight">3.000</span>
+              FORNECEDORES VERIFICADOS
+            </h1>
+            <p>
+              Descubra os mesmos fornecedores secretos usados pelos grandes
+              lojistas brasileiros. Produtos de qualidade com preços a partir de
+              R$ 1,99 no atacado!
+            </p>
+            <a href="#" class="cta-button" onclick="redirectToCheckout()">
+              🚀 QUERO ACESSO AGORA
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="features" id="features">
+        <div class="container">
+          <h2 class="section-title fade-in">Por que escolher nossa lista?</h2>
+          <div class="features-grid">
+            <div class="feature-card fade-in">
+              <div class="feature-icon">✅</div>
+              <h3>Fornecedores Verificados</h3>
+              <p>
+                Todos os contatos foram testados e aprovados por nossa equipe
+                especializada
+              </p>
+            </div>
+            <div class="feature-card fade-in">
+              <div class="feature-icon">💰</div>
+              <h3>Preços Imbatíveis</h3>
+              <p>
+                Acesso direto à fábrica com preços até 80% menores que o varejo
+              </p>
+            </div>
+            <div class="feature-card fade-in">
+              <div class="feature-icon">🚚</div>
+              <h3>Entrega em Domicílio</h3>
+              <p>
+                Fornecedores entregam as mercadorias diretamente na sua casa
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="products" id="products">
+        <div class="container">
+          <h2 class="section-title fade-in">Categorias Disponíveis</h2>
+          <div class="products-grid">
+            <div class="product-card fade-in">
+              <img
+                src="imagens/image2.jpg"
+                alt="Brinquedos"
+                class="product-image"
+              />
+              <div class="product-title">🧸 Brinquedos</div>
+              <div class="product-price">A partir de R$ 2,00</div>
+            </div>
+            <div class="product-card fade-in">
+              <img
+                src="imagens/image10.jpg"
+                alt="Perfumes"
+                class="product-image"
+              />
+              <div class="product-title">🌸 Perfumes</div>
+              <div class="product-price">A partir de R$ 15,00</div>
+            </div>
+            <div class="product-card fade-in">
+              <img
+                src="imagens/image8.jpg"
+                alt="Eletrônicos Gaming"
+                class="product-image"
+              />
+              <div class="product-title">🖥️ Eletrônicos</div>
+              <div class="product-price">A partir de R$ 3,00</div>
+            </div>
+            <div class="product-card fade-in">
+              <img
+                src="imagens/image7.jpg"
+                alt="Calçados"
+                class="product-image"
+              />
+              <div class="product-title">👟 Calçados</div>
+              <div class="product-price">A partir de R$ 24,00</div>
+            </div>
+            <div class="product-card fade-in">
+              <img
+                src="imagens/image9.jpg"
+                alt="Bolsas"
+                class="product-image"
+              />
+              <div class="product-title">👜 Bolsas</div>
+              <div class="product-price">A partir de R$ 10,00</div>
+            </div>
+            <div class="product-card fade-in">
+              <img
+                src="imagens/image6.jpg"
+                alt="Semijoias"
+                class="product-image"
+              />
+              <div class="product-title">💍 Semijoias</div>
+              <div class="product-price">A partir de R$ 0,50</div>
+            </div>
+            <div class="product-card fade-in">
+              <img
+                src="imagens/image5.jpg"
+                alt="Moda Praia"
+                class="product-image"
+              />
+              <div class="product-title">🌊 Moda Praia</div>
+              <div class="product-price">A partir de R$ 5,99</div>
+            </div>
+            <div class="product-card fade-in">
+              <img
+                src="imagens/image4.jpg"
+                alt="Relógios"
+                class="product-image"
+              />
+              <div class="product-title">⌚ Relógios</div>
+              <div class="product-price">A partir de R$ 2,99</div>
+            </div>
+            <div class="product-card fade-in">
+              <img
+                src="imagens/image3.jpg"
+                alt="Maquiagem"
+                class="product-image"
+              />
+              <div class="product-title">💄 Maquiagem</div>
+              <div class="product-price">A partir de R$ 0,80</div>
+            </div>
+            <div class="product-card fade-in">
+              <img
+                src="imagens/image1.jpg"
+                alt="Eletrônicos"
+                class="product-image"
+              />
+              <div class="product-title">📱 Iphones</div>
+              <div class="product-price">Todos os modelos</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials" id="testimonials">
+        <div class="container">
+          <h2 class="section-title fade-in">
+            Provas Reais dos Nossos Clientes
+          </h2>
+          <div class="testimonials-grid">
+            <div class="testimonial-card fade-in">
+              <img
+                src="imagens/prova4.jpg"
+                alt="Prova social 1"
+                style="
+                  width: 100%;
+                  border-radius: 10px;
+                  margin-bottom: 1rem;
+                  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+                "
+              />
+              <p>
+                "Dia de reposição hoje. Chegou mercadoria de 3 fornecedores da
+                lista. Nota 1.000 pra vocês! 👏"
+              </p>
+              <h4>- Luis Paulo Sportsh</h4>
+            </div>
+            <div class="testimonial-card fade-in">
+              <img
+                src="imagens/prova3.jpg"
+                alt="Prova social 2"
+                style="
+                  width: 100%;
+                  border-radius: 10px;
+                  margin-bottom: 1rem;
+                  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+                "
+              />
+              <p>
+                "Mais recebidos de fornecedores da lista. Depois do curso
+                estamos vendendo muito mais! 🚀🚀 Vocês são foda!"
+              </p>
+              <h4>- Cassio Loja Smart</h4>
+            </div>
+            <div class="testimonial-card fade-in">
+              <img
+                src="imagens/prova2.jpg"
+                alt="Prova social 3"
+                style="
+                  width: 100%;
+                  border-radius: 10px;
+                  margin-bottom: 1rem;
+                  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+                "
+              />
+              <p>
+                "Meu terceiro pedido através da lista de fornecedores.
+                Concluímos o curso bônus. Curso e lista completos! 👏"
+              </p>
+              <h4>- Marcio MS Companhia</h4>
+            </div>
+            <div class="testimonial-card fade-in">
+              <img
+                src="imagens/prova1.jpg"
+                alt="Prova social 4"
+                style="
+                  width: 100%;
+                  border-radius: 10px;
+                  margin-bottom: 1rem;
+                  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+                "
+              />
+              <p>
+                "Apaixonadaaaa na lista de fornecedores! 😍 Curso
+                maravilhosoooo, já está nos ajudando muito!"
+              </p>
+              <h4>- Eduarda Emporio</h4>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta" id="contact">
+        <div class="container">
+          <h2 class="fade-in">🎯 OFERTA ESPECIAL POR TEMPO LIMITADO!</h2>
+          <div class="guarantee fade-in">
+            <h3>✨ BÔNUS EXCLUSIVOS ✨</h3>
+            <p>+ Guia Completo de Dropshipping</p>
+            <p>+ Planilha de Controle de Estoque</p>
+            <p>+ Suporte VIP por 90 dias</p>
+          </div>
+          <a href="#" class="cta-button fade-in" onclick="redirectToCheckout()">
+            🔥 GARANTIR ACESSO COM BÔNUS
+          </a>
+          <p
+            class="fade-in"
+            style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8"
+          >
+            ⚡ Acesso instantâneo após o pagamento • Garantia de 7 dias
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Function to redirect to Google
+      function redirectToCheckout() {
+        window.location.href =
+          "https://pay.kiwify.com.br/56JaTH2?afid=eutF7FEM";
+      }
+
+      // Intersection Observer for scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all fade-in elements
+      document.addEventListener("DOMContentLoaded", () => {
+        const fadeElements = document.querySelectorAll(".fade-in");
+        fadeElements.forEach((el) => observer.observe(el));
+      });
+
+      // Add some interactive hover effects
+      document.querySelectorAll(".product-card").forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+          card.style.transform = "scale(1.05) rotateY(5deg)";
+        });
+
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "scale(1) rotateY(0deg)";
+        });
+      });
+    </script>
+  </body>
+</html>
