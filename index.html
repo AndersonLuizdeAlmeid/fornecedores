@@ -115,6 +115,38 @@
         animation: fadeInUp 1s ease-out 0.3s both;
       }
 
+      /* Price Display */
+      .price-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin: 2rem 0;
+        animation: fadeInUp 1s ease-out 0.5s both;
+      }
+
+      .old-price {
+        font-size: 1.5rem;
+        text-decoration: line-through;
+        opacity: 0.8;
+        color: #ffcccb;
+      }
+
+      .current-price {
+        font-size: 3rem;
+        font-weight: 900;
+        color: #fff200;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        animation: pulse 2s infinite;
+      }
+
+      .installments {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1s ease-out 0.6s both;
+      }
+
       .cta-button {
         display: inline-block;
         background: linear-gradient(45deg, #28a745, #20c997);
@@ -286,6 +318,10 @@
         font-weight: bold;
       }
 
+      .final-cta .price-container {
+        margin: 2rem 0;
+      }
+
       .guarantee {
         background: rgba(255, 255, 255, 0.1);
         padding: 1.5rem;
@@ -337,6 +373,15 @@
           font-size: 1.1rem;
         }
 
+        .current-price {
+          font-size: 2.5rem;
+        }
+
+        .price-container {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
         .cta-button {
           padding: 1rem 2rem;
           font-size: 1.1rem;
@@ -384,6 +429,14 @@
               lojistas brasileiros. Produtos de qualidade com preços a partir de
               R$ 1,99 no atacado!
             </p>
+
+            <div class="price-container">
+              <span class="old-price">De R$ 249,00</span>
+              <span class="current-price">R$ 67,00</span>
+            </div>
+
+            <p class="installments">ou em até 12x de R$ 6,93</p>
+
             <a href="#" class="cta-button" onclick="redirectToCheckout()">
               🚀 QUERO ACESSO AGORA
             </a>
@@ -407,7 +460,7 @@
               <div class="feature-icon">💰</div>
               <h3>Preços Imbatíveis</h3>
               <p>
-                Acesso direto à fábrica com preços até 80% menores que o varejo
+                Acesso direto à fábrica com preços até 70% menores que o varejo
               </p>
             </div>
             <div class="feature-card fade-in">
@@ -512,7 +565,7 @@
                 alt="Eletrônicos"
                 class="product-image"
               />
-              <div class="product-title">📱 Iphones</div>
+              <div class="product-title">📱 Celulares</div>
               <div class="product-price">Todos os modelos</div>
             </div>
           </div>
@@ -600,12 +653,14 @@
       <section class="final-cta" id="contact">
         <div class="container">
           <h2 class="fade-in">🎯 OFERTA ESPECIAL POR TEMPO LIMITADO!</h2>
-          <div class="guarantee fade-in">
-            <h3>✨ BÔNUS EXCLUSIVOS ✨</h3>
-            <p>+ Guia Completo de Dropshipping</p>
-            <p>+ Planilha de Controle de Estoque</p>
-            <p>+ Suporte VIP por 90 dias</p>
+
+          <div class="price-container fade-in">
+            <span class="old-price">De R$ 249,00</span>
+            <span class="current-price">R$ 67,00</span>
           </div>
+
+          <p class="installments fade-in">ou em até 12x de R$ 6,93</p>
+
           <a href="#" class="cta-button fade-in" onclick="redirectToCheckout()">
             🔥 GARANTIR ACESSO COM BÔNUS
           </a>
