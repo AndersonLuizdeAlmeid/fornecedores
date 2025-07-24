@@ -16,25 +16,6 @@
       gtag("config", "AW-17379620988");
     </script>
 
-    <!-- Event snippet for Visualização de página conversion page
-In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-    <script>
-      function gtag_report_conversion(url) {
-        var callback = function () {
-          if (typeof url != "undefined") {
-            window.location = url;
-          }
-        };
-        gtag("event", "conversion", {
-          send_to: "AW-17379620988/Q1RECIyz7fQaEPzwn99A",
-          value: 1.0,
-          currency: "BRL",
-          event_callback: callback,
-        });
-        return false;
-      }
-    </script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista Secreta de Fornecedores - Acesso Vitalício</title>
@@ -466,10 +447,10 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
 
             <div class="price-container">
               <span class="old-price">De R$ 249,00</span>
-              <span class="current-price">R$ 67,00</span>
+              <span class="current-price">R$ 97,00</span>
             </div>
 
-            <p class="installments">ou em até 12x de R$ 6,93</p>
+            <p class="installments">ou em até 12x de R$ 10,03</p>
 
             <a href="#" class="cta-button" onclick="redirectToCheckout()">
               🚀 QUERO ACESSO AGORA
@@ -690,10 +671,10 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
 
           <div class="price-container fade-in">
             <span class="old-price">De R$ 249,00</span>
-            <span class="current-price">R$ 67,00</span>
+            <span class="current-price">R$ 97,00</span>
           </div>
 
-          <p class="installments fade-in">ou em até 12x de R$ 6,93</p>
+          <p class="installments fade-in">ou em até 12x de R$ 10,03</p>
 
           <a href="#" class="cta-button fade-in" onclick="redirectToCheckout()">
             🔥 GARANTIR ACESSO COM BÔNUS
@@ -711,9 +692,6 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
     <script>
       // Function to redirect to Google
       function redirectToCheckout() {
-        gtag_report_conversion(
-          "https://pay.kiwify.com.br/56JaTH2?afid=eutF7FEM"
-        );
         window.location.href =
           "https://pay.kiwify.com.br/56JaTH2?afid=eutF7FEM";
       }
